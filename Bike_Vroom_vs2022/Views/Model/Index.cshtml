@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Bike_Vroom_vs2022.Vroom_Model.Model>
+
+<div class="row">
+    <div class="col-sm-6" style="margin-top:20px">
+        <h2 class="text-info"> Model of Vehicle</h2>
+    </div>
+    <div class="col-sm-6 text-right" style="margin-top:20px">
+        <a class="btn btn-info" asp-action="Create"><i class="fas fa-motorcycle"></i> &nbsp; Add New Model</a>
+    </div>
+    <br /> <br />
+    <div class="col-sm-12">
+        <div class="col-sm-12">
+            <table class="table table-striped border" style="width:100%">
+                <tr class="table-info">
+                    <th>
+                        @Html.DisplayNameFor(m=>m.Make)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m=>m.Name)
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m=>item.Make.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m=>item.Name)
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group" role="group">
+                                <a type="button" class="btn btn-primary" href="@Url.Action("Edit", new { id = item.Id })"><i class="fas fa-edit"></i></a>
+                                @* <a type="button" class="btn btn-outline-danger" href="@Url.Action("Delete", new { id = item.Id })">Delete</a> *@
+                                <form method="post" asp-action="Delete" asp-route-id="@item.Id" onsubmit="return confirm('Are you sure you want to delete?');">
+                                    <button type="submit" class="btn btn-danger rounded-0"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
